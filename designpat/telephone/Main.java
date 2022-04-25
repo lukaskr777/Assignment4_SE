@@ -8,6 +8,8 @@ public class Main {
         PhoneModel model = new PhoneModel();
         Screen screen = new Screen(model);
         KeyPad keyPad = new KeyPad(model);
+        model.addListener(new Screen.DialListener(screen));
+        model.addListener(new Screen.DigitListener(screen));
 
         // Run the program
         keyPad.simulateKeyPresses(NUM_DIGITS);

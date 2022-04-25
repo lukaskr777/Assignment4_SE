@@ -10,7 +10,31 @@ import java.util.List;
  */
 public class WebSearchModel {
     private final File sourceFile;
-    private final List<QueryObserver> observers = new ArrayList<>();
+    private final List<QueryFilterObserver> observer_filer_objects = new ArrayList<>();
+
+
+
+    private class QueryFilterObserver{
+        QueryFilter filter;
+        QueryObserver observer;
+        
+        public QueryFilterObserver(QueryFilter filter, QueryObserver observer){
+            this.filter = filter;
+            this.observer = observer;
+        }
+        public QueryFilter getFilter(){
+            return this.filter;
+        }
+        public QueryObserver getObserver(){
+            return this.observer;
+        }
+
+    }
+
+    public interface QueryFilter {
+        public boolean isFiltered(String query);
+        
+    }
 
     public interface QueryObserver {
         void onQuery(String query);
@@ -36,13 +60,16 @@ public class WebSearchModel {
         }
     }
 
-    public void addQueryObserver(QueryObserver queryObserver) {
-        observers.add(queryObserver);
+    public void addQueryObserver(QueryObserver queryObserver, QueryFilter filter) {
+        
+        observer_filer_objects.add(new QueryFilterObserver(filter, queryObserver));
     }
 
     private void notifyAllObservers(String line) {
-        for (QueryObserver obs : observers) {
-            obs.onQuery(line);
+        for (QueryFilterObserver of_obj : observer_filer_objects) {
+            if(!of_obj.getFilter().isFiltered(line)){
+                of_obj.getObserver().onQuery(line);
+            }
         }
     }
 }
