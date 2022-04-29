@@ -1,5 +1,7 @@
 package designpat.bakery;
 
+
+// decorator when we want the cake to be multilayered
 public class MultiLayerDecorator extends CakeDecorator{
 
     public MultiLayerDecorator(Cake cake){

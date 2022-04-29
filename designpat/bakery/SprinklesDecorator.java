@@ -1,5 +1,6 @@
 package designpat.bakery;
 
+// decorator when we want the cake to have sprinkles
 public class SprinklesDecorator extends CakeDecorator{
 
     public SprinklesDecorator(Cake cake){

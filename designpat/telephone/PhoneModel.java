@@ -8,7 +8,9 @@ import java.util.List;
  */
 public class PhoneModel {
     private List<Integer> digits = new ArrayList<>();
-    private List<Listener> listeners = new ArrayList<>();
+
+    // all the observers
+    private List<Screen.Listener> listeners = new ArrayList<>();
     private boolean calling = false;
 
     public void addDigit(int newDigit) {
@@ -16,10 +18,12 @@ public class PhoneModel {
         notifyEveryone();
     }
 
+    // check if we are calling
     public boolean isCalling(){
         return this.calling;
     }
 
+    // pretend that we are calling
     public void call(){
         calling = true;
         notifyEveryone();
@@ -30,12 +34,14 @@ public class PhoneModel {
         return digits;
     }
 
-    public void addListener(Listener l){
+    // add a new listener
+    public void addListener(Screen.Listener l){
         listeners.add(l);
     }
 
+    // notifies all listeners
     public void notifyEveryone(){
-        for(Listener l : listeners){
+        for(Screen.Listener l : listeners){
             l.update(this);
         }
     }

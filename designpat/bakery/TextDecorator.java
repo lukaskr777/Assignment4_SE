@@ -1,5 +1,6 @@
 package designpat.bakery;
 
+// decorator when we want the cake to have text
 public class TextDecorator extends CakeDecorator{
 
     String text;

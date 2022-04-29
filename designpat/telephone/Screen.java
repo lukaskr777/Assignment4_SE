@@ -9,6 +9,13 @@ public class Screen {
     private final PhoneModel model;
 
 
+    // interface for a custom Listener
+    public interface Listener {
+
+        public void update(PhoneModel model);    
+    }
+
+    // listener that, when notifies, print a now added digit
     static class DigitListener implements Listener{
 
         Screen screen;
@@ -26,7 +33,8 @@ public class Screen {
         }
     }
 
-    static class DialListener implements Listener{
+    // listener, when notified, prints who we are calling, IF we are calling
+    static class DialListener implements Listener{  
         
         Screen screen;
 

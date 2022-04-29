@@ -13,7 +13,7 @@ public class WebSearchModel {
     private final List<QueryFilterObserver> observer_filer_objects = new ArrayList<>();
 
 
-
+    // class, whose object will store QueryFilter and QueryObserver, so we can store them together
     private class QueryFilterObserver{
         QueryFilter filter;
         QueryObserver observer;
@@ -31,10 +31,12 @@ public class WebSearchModel {
 
     }
 
+    // interface for custom query filter
     public interface QueryFilter {
         public boolean isFiltered(String query);
         
     }
+
 
     public interface QueryObserver {
         void onQuery(String query);
@@ -60,6 +62,7 @@ public class WebSearchModel {
         }
     }
 
+    // add QueryObserver and its correspondiong filter
     public void addQueryObserver(QueryObserver queryObserver, QueryFilter filter) {
         
         observer_filer_objects.add(new QueryFilterObserver(filter, queryObserver));
